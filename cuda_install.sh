@@ -7,11 +7,6 @@ sudo apt-get -y install libglu1-mesa libxi-dev \
                         libxmu-dev libglu1-mesa-dev \
                         libgl1-mesa-dev freeglut3 freeglut3-dev \
                         mesa-common-dev
-sudo rm /usr/lib/libGL.so && \
-     sudo ln -s /usr/lib/x86_64-linux-gnu/libGL.so /usr/lib/libGL.so && \
-     sudo ldconfig
-
-
 
 if [ ! -e "cuda_10.0.130_410.48_linux.run" ]; then
     echo "Download CUDA 10.0"
