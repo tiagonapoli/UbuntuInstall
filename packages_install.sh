@@ -1,5 +1,4 @@
 #!/bin/bash
-#TODO add chrome
 
 cd ~/Documents
 
@@ -32,8 +31,17 @@ sudo snap install discord vlc spotify telegram-desktop
 #Langs
 sudo apt-get -y install python3 python-pip
 
+#Chrome
+sudo apt-get install libxss1 libappindicator1 libindicator7
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome*.deb
+sudo apt-get install -f
+
 #tweaks
 sudo apt -y install gnome-tweaks
 sudo apt-get install chrome-gnome-shell
+
+#alternate tab
+./gnome-shell-extension.sh --install --extension-id 15
 
 

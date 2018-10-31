@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#CUDA 9.1
+
 cd ~/Downloads
 
 sudo apt-get -y install linux-headers-$(uname -r)
