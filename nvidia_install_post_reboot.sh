@@ -3,4 +3,5 @@
 cd ~/Documents
 
 sudo telinit 3
-bash NVIDIA-Linux-x86_64-410.73.bin
+
+sudo bash NVIDIA-Linux-x86_64-390.87.run --opengl-headers
