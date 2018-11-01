@@ -1,0 +1,13 @@
+{
+    "repos": [
+        {   
+            "repo": "https://github.com/tiagonapoli/maratona",
+            "callback": "cp ~/Documents/maratona/vimrc ~/.vimrc"
+        },        
+        {   
+            "repo": "https://github.com/tiagonapoli/UbuntuInstall",
+            "callback": ""
+        }
+    ]
+}
+ 
