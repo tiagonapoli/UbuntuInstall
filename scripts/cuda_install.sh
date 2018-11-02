@@ -9,11 +9,19 @@ sudo apt-get -y install libglu1-mesa libxi-dev \
                         libgl1-mesa-dev freeglut3 freeglut3-dev \
                         mesa-common-dev
 
-wget -O cuda_installer.run -c https://developer.nvidia.com/compute/cuda/$2/Prod/local_installers/cuda_$3_linux
-sudo sh cuda_installer.run
-sudo sh cuda_installer.run -silent -driver
+wget -O cuda_installer$2.run -c https://developer.nvidia.com/compute/cuda/$2/Prod/local_installers/cuda_$3_linux
+
+sudo sh cuda_installer$2.run --override --silent --toolkit --samples --verbose
+
+echo "===================================="
+cat /proc/driver/nvidia/version
+echo "===================================="
+
+echo "PATH=$PATH:/usr/local/cuda-$2/bin:" >> ~/.profile
+echo "LD_LIBRARY_PATH=/usr/local/cuda-$2/lib64:$LD_LIBRARY_PATH" >> ~/.profile
+
+cd /usr/local/cuda/samples/1_Utilities/deviceQuery
+sudo make || exit 2
+./deviceQuery || exit 3
 
 
-#echo "PATH=$PATH:/usr/local/cuda-10.0/bin:" >> ~/.profile
-#export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64\
-#                         ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}

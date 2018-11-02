@@ -17,7 +17,7 @@ sudo tlp start
 sudo apt -y install ubuntu-restricted-extras
 
 #base
-sudo apt-get -y install htop terminator curl
+sudo apt-get -y install htop terminator curl cut
 
 #snap
 sudo apt-get -y install snapd snapd-xdg-open

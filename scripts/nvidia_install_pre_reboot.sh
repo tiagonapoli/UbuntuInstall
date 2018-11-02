@@ -1,9 +1,7 @@
 #!/bin/bash
 #./nvidia_install_pre_reboot.sh nvidia-version cuda-version
 
-cd ~/Documents
-
-wget -O nvidia_driver_installer.run -c http://us.download.nvidia.com/XFree86/Linux-x86_64/$1/NVIDIA-Linux-x86_64-$1.run
+wget -O ~/Downloads/nvidia_driver_installer$1.run -c http://us.download.nvidia.com/XFree86/Linux-x86_64/$1/NVIDIA-Linux-x86_64-$1.run
 sudo dpkg --add-architecture i386
 sudo apt update
 sudo apt install build-essential libc6:i386 dkms pkg-config
@@ -15,3 +13,6 @@ sudo bash -c "echo options nouveau modeset=0 >> /etc/modprobe.d/blacklist-nvidia
 cat /etc/modprobe.d/blacklist-nvidia-nouveau.conf
 
 sudo update-initramfs -u
+ret=$(cat ./output/step.info | cut -d" " -f2-)
+echo $ret > ./output/step.info
+reboot
