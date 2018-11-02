@@ -3,14 +3,14 @@ import os
 import stat
 import json
 
-scripts= [ #("scripts/packages_install.sh", ""),
-           #("scripts/docker_install.sh", ""),
-           ("scripts/git_install.sh", "config/git.conf"),
-           #("scripts/clone_repos.py", ""),
-        #    ("scripts/nvidia_install_pre_reboot.sh", ""),
-        #    ("scripts/nvidia_install_post_reboot0.sh", ""),
-        #    ("scripts/nvidia_install_post_reboot1.sh", ""),
-        #    ("scripts/cuda_install.sh", ""),
+scripts= [  ("scripts/packages_install.sh", ""),
+            ("scripts/docker_install.sh", ""),
+            ("scripts/git_install.sh", "config/git.conf"),
+            ("scripts/clone_repos.py", ""),
+            ("scripts/nvidia_install_pre_reboot.sh", "config/nvidia.conf"),
+            ("scripts/nvidia_install_post_reboot0.sh", "config/nvidia.conf"),
+            ("scripts/nvidia_install_post_reboot1.sh", "config/nvidia.conf"),
+            ("scripts/cuda_install.sh", "config/nvidia.conf"),
         #    ("scripts/nvidia_docker_install.sh", "")
         ]
 
@@ -59,6 +59,7 @@ def main():
 
         command = ["./" + scripts[i][0]]
         command.extend(list(get_config(scripts[i][1]).values()))
+        print(command)
         process = subprocess.Popen(command)
         process.wait()
         print("Fim: {}".format(process.returncode))
