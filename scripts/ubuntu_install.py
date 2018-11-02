@@ -7,6 +7,7 @@ STEP_PATH = 'output/step.info'
 INSTALATION_CONF = 'config/install.conf'
 
 scripts= {'packages':       ("scripts/packages_install.sh", ""),
+          'customize':      ("scripts/customize.sh", ""),
           'docker':         ("scripts/docker_install.sh", ""),
           'git':            ("scripts/git_install.sh", "config/git.conf"),
           'repos':          ("scripts/clone_repos.py", ""),
@@ -36,6 +37,7 @@ def print_header(text):
 def get_options():
     options = {
         "packages": ['packages'],
+        "customize": ['customize'],
         "docker": ['docker'],
         "git": ['git'],
         "repos": ['repos'],
