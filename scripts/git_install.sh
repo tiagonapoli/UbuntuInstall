@@ -1,29 +1,32 @@
 #!/bin/bash
+#./git_install email username editor
 
-cd ~/Documents
+function git_install {
+    sudo apt-get -y install git
+    git config --global user.email $1
+    git config --global user.name $2
+    git config --global core.editor $3
+}
 
-#git
-sudo apt-get -y install git
-git config --global user.email "napoli.tiago@hotmail.com"
-git config --global user.name "tiagonapoli"
+function sshkey_creation {
+    rm -rf ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
+    ssh-keygen -t rsa
+    ssh-add ~/.ssh/id_rsa
+}
 
-#ssh git
-echo "ssh github"
-rm -rf ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
-ssh-keygen -t rsa
-ssh-add ~/.ssh/id_rsa
-pub=`cat ~/.ssh/id_rsa.pub`
-read -p "Enter github username: " githubuser
-echo "Using username $githubuser"
-read -s -p "Enter github password for user $githubuser: " githubpass
-curl -u "$githubuser:$githubpass" -X POST -d "{\"title\":\"`hostname`\",\"key\":\"$pub\"}" https://api.github.com/user/keys
+function send_sshkey_to_github {
+    pub=`cat ~/.ssh/id_rsa.pub`
+    read -s -p "Enter github password for user $1: " githubpass
+    ret=$(curl -u "$1:$githubpass" -X POST -d "{\"title\":\"`hostname`\",\"key\":\"$pub\"}" https://api.github.com/user/keys)
+    echo $ret
+    if echo $ret | grep -q "message"; then
+        echo "Error on sending ssh key to github"
+        return 1
+    else
+        return 0
+    fi    
+}
 
-#clone git
-git clone git@github.com:tiagonapoli/maratona.git
-cp maratona/vimrc ~/.vimrc
-
-#tweaks
-sudo apt -y install gnome-tweaks
-sudo apt-get install chrome-gnome-shell
-
-
+git_install $1 $2 $3
+sshkey_creation 
+send_sshkey_to_github $2 || exit 1
