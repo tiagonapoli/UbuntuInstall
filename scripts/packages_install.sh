@@ -24,7 +24,11 @@ sudo apt-get -y install snapd snapd-xdg-open
 
 #Editors
 sudo apt-get -y install vim
-sudo snap install --classic vscode
+wget -O ~/Downloads/vscode_install.deb -c https://go.microsoft.com/fwlink/?LinkID=760868
+sudo dpkg -i ~/Downloads/vscode_install.deb
+sudo apt-get install -y -f
+
+#Media & social
 sudo snap install discord vlc spotify telegram-desktop
 
 #Langs
@@ -32,10 +36,9 @@ sudo apt-get -y install python3 python-pip
 
 #Chrome
 sudo apt-get -y install libxss1 libappindicator1 libindicator7
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome*.deb
+wget -O ~/Downloads/google_chrome_install.deb -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i ~/Downloads/google_chrome_install.deb
 sudo apt-get install -f
-rm google-chrome-stable_current_amd64.deb
 
 #tweaks
 sudo apt -y install gnome-tweaks
