@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ~/Downloads
+
 function install_docker {
   curl -fsSL get.docker.com -o get-docker.sh
   chmod +x get-docker.sh
