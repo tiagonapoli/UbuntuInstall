@@ -1,6 +1,8 @@
 #!/bin/bash
 #./cuda_install.sh nvidia-version cuda-version
 
+#https://kislayabhi.github.io/Installing_CUDA_with_Ubuntu/
+
 cd ~/Downloads
 
 sudo apt-get -y install linux-headers-$(uname -r)
