@@ -1,7 +1,7 @@
 {
     "repos": [
         {   
-            "repo": "https://github.com/tiagonapoli/maratona",
+            "repo": "git@github.com:tiagonapoli/maratona.git",
             "callback": "cp ~/Documents/maratona/vimrc ~/.vimrc"
         },        
         {   
