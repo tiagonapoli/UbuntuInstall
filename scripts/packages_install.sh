@@ -47,4 +47,25 @@ sudo apt-get install chrome-gnome-shell
 #alternate tab
 ./scripts/gnome-shell-extension.sh --install --extension-id 15
 
+#Web development
+sudo apt-get install nodejs
+sudo apt-get install build-essential libssl-dev
+curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
+bash install_nvm.sh
+source ~/.profile
+nvm install 11.4.0
 
+#vscode extensions
+find * -name "*.list" | while read fn; do
+    cmd="${fn%.*}"
+    set -- $cmd
+    info "Installing $1 packages..."
+    while read package; do
+        if [[ $package == $COMMENT ]];
+        then continue
+        fi
+        substep_info "Installing $package..."
+        $cmd $package
+    done < "$fn"
+    success "Finished installing $1 packages."
+done
