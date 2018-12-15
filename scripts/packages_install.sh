@@ -54,6 +54,7 @@ curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o 
 bash install_nvm.sh
 source ~/.profile
 nvm install 11.4.0
+snap install postman
 
 #vscode extensions
 find * -name "*.list" | while read fn; do

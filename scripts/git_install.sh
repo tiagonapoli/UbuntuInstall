@@ -12,6 +12,8 @@ function sshkey_creation {
     rm -rf ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
     ssh-keygen -t rsa
     ssh-add ~/.ssh/id_rsa
+    sudo apt-get install xclip
+    xclip -sel clip < ~/.ssh/id_rsa.pub
 }
 
 function send_sshkey_to_github {
