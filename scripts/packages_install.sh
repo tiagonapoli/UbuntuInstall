@@ -24,6 +24,7 @@ sudo apt-get -y install snapd snapd-xdg-open
 
 #Editors
 sudo apt-get -y install vim
+export EDITOR=/usr/bin/gedit
 wget -O ~/Downloads/vscode_install.deb -c https://go.microsoft.com/fwlink/?LinkID=760868
 sudo dpkg -i ~/Downloads/vscode_install.deb
 sudo apt-get install -y -f
@@ -48,13 +49,21 @@ sudo apt-get install chrome-gnome-shell
 ./scripts/gnome-shell-extension.sh --install --extension-id 15
 
 #Web development
-sudo apt-get install nodejs
-sudo apt-get install build-essential libssl-dev
+sudo apt-get -y install nodejs
+sudo apt-get -y install build-essential libssl-dev
+cd ~/Downloads
 curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
 bash install_nvm.sh
-source ~/.profile
-nvm install 11.4.0
+. ~/.nvm/nvm.sh
+nvm install 11.4.0 
 snap install postman
+
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt -y update
+sudo apt -y install --no-install-recommends yarn
+
+yarn global add vtex
 
 #vscode extensions
 find * -name "*.list" | while read fn; do
