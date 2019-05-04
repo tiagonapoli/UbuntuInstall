@@ -4,53 +4,64 @@
 sudo apt -y update && sudo apt -y upgrade
 
 #Preload
-sudo apt-get -y install preload
+sudo apt -y install preload
 
 #TLP
 sudo add-apt-repository -r -y  ppa:linrunner/tlp
 sudo add-apt-repository -y ppa:linrunner/tlp
-sudo apt-get update
-sudo apt-get -y install tlp tlp-rdw
+sudo apt update
+sudo apt -y install tlp tlp-rdw
 sudo tlp start
 
 #restricted extras
 sudo apt -y install ubuntu-restricted-extras
 
 #base
-sudo apt-get -y install htop terminator curl
+sudo apt -y install htop terminator curl
 
 #snap
-sudo apt-get -y install snapd snapd-xdg-open
+sudo apt -y install snapd snapd-xdg-open
 
 #Editors
-sudo apt-get -y install vim
+sudo apt -y install vim
 export EDITOR=/usr/bin/gedit
 wget -O ~/Downloads/vscode_install.deb -c https://go.microsoft.com/fwlink/?LinkID=760868
 sudo dpkg -i ~/Downloads/vscode_install.deb
-sudo apt-get install -y -f
+sudo apt install -y -f
 
 #Media & social
 sudo snap install discord vlc spotify telegram-desktop
 
 #Langs
-sudo apt-get -y install python3 python-pip
+sudo apt -y install python3 python-pip
 
 #Chrome
-sudo apt-get -y install libxss1 libappindicator1 libindicator7
+sudo apt -y install libxss1 libappindicator1 libindicator7
 wget -O ~/Downloads/google_chrome_install.deb -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i ~/Downloads/google_chrome_install.deb
-sudo apt-get install -f
+sudo apt install -f
 
 #tweaks
 sudo apt -y install gnome-tweaks
-sudo apt-get install chrome-gnome-shell
+sudo apt -y install chrome-gnome-shell
+
+#wallpaper natgeo
+sudo add-apt-repository -y ppa:atareao/atareao && sudo apt update
+sudo apt install -y national-geographic-wallpaper
 
 #alternate tab
 ./scripts/gnome-shell-extension.sh --install --extension-id 15
 
+#system-monitor gnome extension
+sudo apt install -y gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  gir1.2-clutter-1.0
+./scripts/gnome-shell-extension.sh --install --extension-id 120
+
+#vscode
+./vscode_extensions.sh
+
 #Web development
-sudo apt-get -y install nodejs
-sudo apt-get -y install build-essential libssl-dev
+sudo apt -y install nodejs
+sudo apt -y install build-essential libssl-dev
 cd ~/Downloads
 curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
 bash install_nvm.sh
@@ -63,19 +74,3 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt -y update
 sudo apt -y install --no-install-recommends yarn
 
-yarn global add vtex
-
-#vscode extensions
-find * -name "*.list" | while read fn; do
-    cmd="${fn%.*}"
-    set -- $cmd
-    info "Installing $1 packages..."
-    while read package; do
-        if [[ $package == $COMMENT ]];
-        then continue
-        fi
-        substep_info "Installing $package..."
-        $cmd $package
-    done < "$fn"
-    success "Finished installing $1 packages."
-done
