@@ -10,16 +10,22 @@ function git_install {
 
 function sshkey_creation {
     rm -rf ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
-    ssh-keygen -t rsa
+    ssh-keygen -t rsa -b 4096 -C "$1"
     ssh-add ~/.ssh/id_rsa
-    sudo apt-get install xclip
-    xclip -sel clip < ~/.ssh/id_rsa.pub
 }
 
 function send_sshkey_to_github {
     pub=`cat ~/.ssh/id_rsa.pub`
     read -s -p "Enter github password for user $1: " githubpass
-    ret=$(curl -u "$1:$githubpass" -X POST -d "{\"title\":\"`hostname`\",\"key\":\"$pub\"}" https://api.github.com/user/keys)
+    read -p "Enter the 2 factor key: " otp
+    auth=$(echo -n $user:$password | base64 -)
+
+    ret=$(curl --request POST \
+               --url https://api.github.com/user/keys \
+               --header "Authorization: Basic $auth" \
+               --header "x-github-otp: $otp" \
+               --data   "{\"title\":\"`hostname`\",\"key\":\"$pub\"}")
+    
     echo $ret
     if echo $ret | grep -q "message"; then
         echo "Error on sending ssh key to github"
