@@ -16,10 +16,11 @@ function sshkey_creation {
 
 function send_sshkey_to_github {
     pub=`cat ~/.ssh/id_rsa.pub`
-    read -s -p "Enter github password for user $1: " githubpass
+    user=$1
+    read -s -p "Enter github password for user $1: " password
     read -p "Enter the 2 factor key: " otp
     auth=$(echo -n $user:$password | base64 -)
-
+    
     ret=$(curl --request POST \
                --url https://api.github.com/user/keys \
                --header "Authorization: Basic $auth" \
@@ -36,5 +37,5 @@ function send_sshkey_to_github {
 }
 
 git_install $1 $2 $3
-sshkey_creation 
+sshkey_creation
 send_sshkey_to_github $2 || exit 1
