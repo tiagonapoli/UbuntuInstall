@@ -6,19 +6,8 @@ azemoh.one-monokai
 dbaeumer.vscode-eslint
 #
 # Extensions
+apollographql.vscode-apollo
 CoenraadS.bracket-pair-colorizer
-Zignd.html-css-class-completion
-formulahendry.auto-close-tag
-formulahendry.auto-rename-tag
-naumovs.color-highlight
-steoates.autoimport
-abusaidm.html-snippets
-anseki.vscode-color
-austin.code-gnu-global
-christian-kohler.path-intellisense
-ms-vscode.cpptools
-ms-vscode.Go
-Orta.vscode-jest
-PeterJausovec.vscode-docker
-richie5um2.vscode-sort-json
-Tyriar.sort-lines
+eamodio.gitlens
+esbenp.prettier-vscode
+PKief.material-icon-theme

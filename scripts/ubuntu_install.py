@@ -7,6 +7,7 @@ STEP_PATH = 'output/step.info'
 INSTALATION_CONF = 'config/install.conf'
 
 scripts= {'packages':       ("scripts/packages_install.sh", ""),
+          'bashrc':         ("scripts/bashrc.sh", "")
           'customize':      ("scripts/customize.sh", ""),
           'docker':         ("scripts/docker_install.sh", ""),
           'git':            ("scripts/git_install.sh", "config/git.conf"),

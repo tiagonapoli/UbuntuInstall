@@ -17,7 +17,7 @@ sudo tlp start
 sudo apt -y install ubuntu-restricted-extras
 
 #base
-sudo apt -y install htop terminator curl
+sudo apt -y install htop terminator curl zstd
 
 #snap
 sudo apt -y install snapd snapd-xdg-open
@@ -30,7 +30,7 @@ sudo dpkg -i ~/Downloads/vscode_install.deb
 sudo apt install -y -f
 
 #Media & social
-sudo snap install discord vlc spotify telegram-desktop
+sudo snap install slack vlc telegram-desktop
 
 #Langs
 sudo apt -y install python3 python-pip
@@ -44,10 +44,6 @@ sudo apt install -f
 #tweaks
 sudo apt -y install gnome-tweaks
 sudo apt -y install chrome-gnome-shell
-
-#wallpaper natgeo
-sudo add-apt-repository -y ppa:atareao/atareao && sudo apt update
-sudo apt install -y national-geographic-wallpaper
 
 #alternate tab
 ./scripts/gnome-shell-extension.sh --install --extension-id 15
@@ -66,11 +62,20 @@ cd ~/Downloads
 curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
 bash install_nvm.sh
 . ~/.nvm/nvm.sh
-nvm install 11.4.0 
+nvm install 12 
 snap install postman
 
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt -y update
 sudo apt -y install --no-install-recommends yarn
+
+# Add yarn global packages
+
+yarn global add \
+  @tiagonapoli/vtex-scripts \
+  cost-of-modules \
+  releasy \
+  typescript \
+  vtex
 
