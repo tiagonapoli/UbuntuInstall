@@ -5,18 +5,18 @@ function git_install {
     sudo apt-get -y install git
     # gitconfig
     echo "
-    [user]
-        email = tiago.napoli@vtex.com.br
-        name = tiagonapoli
-    [core]
-        editor = vim
-    [alias]
-        tree = log --graph --decorate --pretty=oneline --abbrev-commit
-        st = status
-        co = checkout
-        c = commmit -v
-        cssh = !sh -c 'git clone git@github.com:\$1 ' -
-    " > ~/.gitconfig
+[user]
+    email = tiago.napoli@vtex.com.br
+    name = tiagonapoli
+[core]
+    editor = vim
+[alias]
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
+    st = status
+    co = checkout
+    c = commit -v
+    cssh = !sh -c 'git clone git@github.com:\$1 ' -
+" > ~/.gitconfig
 }
 
 function sshkey_creation {
@@ -47,12 +47,12 @@ function send_sshkey_to_github {
     fi    
 }
 
+git_install
+sshkey_creation
+send_sshkey_to_github $2 || exit 1
+
 read -p "Enter your GITHUB_API_TOKEN (https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line): " gitToken
 
 echo "
 export GITHUB_API_TOKEN=$gitToken
 " >> ~/.bashrc
-
-git_install
-sshkey_creation
-send_sshkey_to_github $2 || exit 1
