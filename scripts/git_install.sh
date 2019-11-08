@@ -14,6 +14,7 @@ function git_install {
         tree = log --graph --decorate --pretty=oneline --abbrev-commit
         st = status
         co = checkout
+        c = commmit -v
         cssh = !sh -c 'git clone git@github.com:\$1 ' -
     " > ~/.gitconfig
 }

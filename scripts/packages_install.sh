@@ -3,6 +3,13 @@
 #update
 sudo apt -y update && sudo apt -y upgrade
 
+#snap
+sudo apt -y install snapd snapd-xdg-open
+
+#Media & social
+sudo snap install vlc telegram-desktop
+sudo snap install slack --classic
+
 #Preload
 sudo apt -y install preload
 
@@ -19,18 +26,12 @@ sudo apt -y install ubuntu-restricted-extras
 #base
 sudo apt -y install htop terminator curl zstd
 
-#snap
-sudo apt -y install snapd snapd-xdg-open
-
 #Editors
 sudo apt -y install vim
 export EDITOR=/usr/bin/gedit
 wget -O ~/Downloads/vscode_install.deb -c https://go.microsoft.com/fwlink/?LinkID=760868
 sudo dpkg -i ~/Downloads/vscode_install.deb
 sudo apt install -y -f
-
-#Media & social
-sudo snap install slack vlc telegram-desktop
 
 #Langs
 sudo apt -y install python3 python-pip

@@ -6,17 +6,13 @@ import json
 STEP_PATH = 'output/step.info'
 INSTALATION_CONF = 'config/install.conf'
 
-scripts= {'packages':       ("scripts/packages_install.sh", ""),
-          'bashrc':         ("scripts/bashrc.sh", "")
-          'customize':      ("scripts/customize.sh", ""),
-          'docker':         ("scripts/docker_install.sh", ""),
-          'git':            ("scripts/git_install.sh", "config/git.conf"),
-          'repos':          ("scripts/clone_repos.py", ""),
-          'nvidia0':        ("scripts/nvidia_install_pre_reboot.sh", "config/nvidia.conf"),
-          'nvidia1':        ("scripts/nvidia_install_post_reboot0.sh", "config/nvidia.conf"),
-          'nvidia2':        ("scripts/nvidia_install_post_reboot1.sh", "config/nvidia.conf"),
-          'cuda':           ("scripts/cuda_install.sh", "config/nvidia.conf"),
-          'nvidia-docker':  ("scripts/nvidia_docker_install.sh", "")
+scripts= {
+    'packages':       ("scripts/packages_install.sh", ""),
+    'bashrc':         ("scripts/bashrc.sh", ""),
+    'customize':      ("scripts/customize.sh", ""),
+    'docker':         ("scripts/docker_install.sh", ""),
+    'git':            ("scripts/git_install.sh", "config/git.conf"),
+    'repos':          ("scripts/clone_repos.py", "")
 }
 
 def get_config(path):
@@ -38,13 +34,11 @@ def print_header(text):
 def get_options():
     options = {
         "packages": ['packages'],
+        "bashrc": ['bashrc'],
         "customize": ['customize'],
         "docker": ['docker'],
         "git": ['git'],
-        "repos": ['repos'],
-        "nvidia-driver": ['nvidia0', 'nvidia1', 'nvidia2'],
-        "cuda": ['cuda'],
-        "nvidia-docker": ['nvidia-docker']
+        "repos": ['repos']
     }
 
     ret = []
