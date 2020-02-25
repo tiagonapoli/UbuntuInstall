@@ -1,0 +1,76 @@
+{
+  "gitSetup": {
+    "userSetup": {
+      "flags": [
+        { "key": "e", "value": "tiago.napoli@vtex.com.br" },
+        { "key": "n", "value": "tiagonapoli" },
+        { "key": "t", "value": "vim" }
+      ]
+    },
+    "repositories": {
+      "args": [
+        {
+          "type": "json",
+          "value": [
+            {
+              "url": "git@github.com:tiagonapoli/competitiveProgramming.git",
+              "callback": "cp ~/Documents/competitiveProgramming/vimrc ~/.vimrc"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "vscodeSetup": {
+    "args": [
+      {
+        "type": "json",
+        "value": {
+          "settings": {
+            "workbench.iconTheme": "material-icon-theme",
+            "[typescript]": {
+              "editor.defaultFormatter": "esbenp.prettier-vscode"
+            },
+            "[json]": {
+              "editor.defaultFormatter": "esbenp.prettier-vscode"
+            },
+            "[javascript]": {
+              "editor.defaultFormatter": "esbenp.prettier-vscode"
+            },
+            "typescript.referencesCodeLens.enabled": true
+          }
+        },
+        "keyBindings": [
+          {
+            "key": "ctrl+up",
+            "command": "cursorMove",
+            "args": {
+              "to": "up",
+              "by": "line",
+              "value": 10
+            },
+            "when": "editorTextFocus"
+          },
+          {
+            "key": "ctrl+down",
+            "command": "cursorMove",
+            "args": {
+              "to": "down",
+              "by": "line",
+              "value": 10
+            },
+            "when": "editorTextFocus"
+          }
+        ],
+        "extensionsToInstall": [
+          "PKief.material-icon-theme",
+          "azemoh.one-monokai",
+          "dbaeumer.vscode-eslint",
+          "CoenraadS.bracket-pair-colorizer",
+          "eamodio.gitlens",
+          "esbenp.prettier-vscode"
+        ]
+      }
+    ]
+  }
+}

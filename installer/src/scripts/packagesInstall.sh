@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 #update
 sudo apt -y update && sudo apt -y upgrade
 
@@ -14,10 +16,7 @@ sudo snap install slack --classic
 sudo apt -y install preload
 
 #TLP
-sudo add-apt-repository -r -y  ppa:linrunner/tlp
-sudo add-apt-repository -y ppa:linrunner/tlp
-sudo apt update
-sudo apt -y install tlp tlp-rdw
+sudo apt -y install tlp
 sudo tlp start
 
 #restricted extras
@@ -28,9 +27,8 @@ sudo apt -y install htop terminator curl zstd
 
 #Editors
 sudo apt -y install vim
-export EDITOR=/usr/bin/gedit
-wget -O ~/Downloads/vscode_install.deb -c https://go.microsoft.com/fwlink/?LinkID=760868
-sudo dpkg -i ~/Downloads/vscode_install.deb
+wget -O /tmp/vscode_install.deb -c https://go.microsoft.com/fwlink/?LinkID=760868
+sudo dpkg -i /tmp/vscode_install.deb
 sudo apt install -y -f
 
 #Langs
@@ -38,30 +36,15 @@ sudo apt -y install python3 python-pip
 
 #Chrome
 sudo apt -y install libxss1 libappindicator1 libindicator7
-wget -O ~/Downloads/google_chrome_install.deb -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i ~/Downloads/google_chrome_install.deb
-sudo apt install -f
-
-#tweaks
-sudo apt -y install gnome-tweaks
-sudo apt -y install chrome-gnome-shell
-
-#alternate tab
-./scripts/gnome-shell-extension.sh --install --extension-id 15
-
-#system-monitor gnome extension
-sudo apt install -y gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  gir1.2-clutter-1.0
-./scripts/gnome-shell-extension.sh --install --extension-id 120
-
-#vscode
-./vscode_extensions.sh
+wget -O /tmp/google_chrome_install.deb -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i /tmp/google_chrome_install.deb
+sudo apt install -y -f
 
 #Web development
 sudo apt -y install nodejs
 sudo apt -y install build-essential libssl-dev
-cd ~/Downloads
-curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o install_nvm.sh
-bash install_nvm.sh
+curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh -o /tmp/install_nvm.sh
+bash /tmp/install_nvm.sh
 . ~/.nvm/nvm.sh
 nvm install 12 
 snap install postman
@@ -72,7 +55,6 @@ sudo apt -y update
 sudo apt -y install --no-install-recommends yarn
 
 # Add yarn global packages
-
 yarn global add \
   @tiagonapoli/vtex-scripts \
   cost-of-modules \
@@ -80,3 +62,6 @@ yarn global add \
   typescript \
   vtex
 
+# Dropbox
+wget -O /tmp/dropbox.deb -c https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
+sudo dpkg -i /tmp/dropbox.deb

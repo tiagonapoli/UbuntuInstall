@@ -1,0 +1,22 @@
+[
+  { "name": "packagesInstall", "scriptPath": "packagesInstall.sh" },
+  { "name": "bashrcSetup", "scriptPath": "bashrcSetup.sh" },
+  {
+    "name": "virtualizationSetup",
+    "children": [
+      { "name": "dockerInstall", "scriptPath": "virtualizationSetup/dockerInstall.sh" },
+      { "name": "kubectlInstall", "scriptPath": "virtualizationSetup/kubectlInstall.sh" },
+      { "name": "minikubeInstall", "scriptPath": "virtualizationSetup/minikubeInstall.sh" }
+    ]
+  },
+  { "name": "customizeAppearance", "scriptPath": "customizeAppearance.sh" },
+  {
+    "name": "gitSetup",
+    "configSubPath": "gitSetup",
+    "children": [
+      { "name": "userSetup", "scriptPath": "gitSetup.sh", "configSubPath": "userSetup" },
+      { "name": "repositoriesSetup", "scriptPath": "repositorySetup.js", "configSubPath": "repositories" }
+    ]
+  },
+  { "name": "vscodeSetup", "configSubPath": "vscodeSetup", "scriptPath": "vscodeSetup.js" }
+]

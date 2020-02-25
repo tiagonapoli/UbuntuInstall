@@ -1,4 +1,9 @@
-output/*
+tmp
+node_modules
+wget-log*
 *.out
 *.info
-wget-log
+*.log
+.vscode
+minikube
+/installer/lib
