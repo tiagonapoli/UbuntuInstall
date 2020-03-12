@@ -4,7 +4,7 @@ set -euo pipefail
 display_info() {
   printf "Usage ./start.sh [OPT]\nOptions are:\n"
   printf "  -e: Email from github\n"
-  printf "  -u: Username from github\n"
+  printf "  -u: Your name\n"
   printf "  -t: Desired editor\n"
   printf "  -h: Show this message\n"
   exit 0
@@ -23,40 +23,42 @@ while getopts "e:u:t:" OPT; do
   esac 
 done
 
-if ["$EMAIL" == ""]; then
+if [ "$EMAIL" == "" ]; then
   echo "MISSING EMAIL FLAG"
   exit 1
 fi
 
-if ["$USERNAME" == ""]; then
+if [ "$USERNAME" == "" ]; then
   echo "MISSING USERNAME FLAG"
   exit 1
 fi
 
-if ["$EDITRO" == ""]; then
+if [ "$EDITOR" == "" ]; then
   echo "MISSING EDITOR FLAG"
   exit 1
 fi
 
-GIT_CONFIG="
-[user]
-  email = $EMAIL
-  name = $USERNAME
-[core]
-  editor = $EDITOR
-[alias]
-  tree = log --graph --decorate --pretty=oneline --abbrev-commit
-  st = status
-  co = checkout
-  c = commit -v
-  cssh = !sh -c 'git clone git@github.com:\$1 ' -
-  rom = rebase origin/master
-  undo = reset HEAD~1 --mixed
+GIT_CONFIG="[user]\n\
+  email = $EMAIL\n\
+  name = $USERNAME\n\
+[core]\n\
+  editor = $EDITOR\n\
+[alias]\n\
+  tree = log --graph --decorate --pretty=oneline --abbrev-commit\n\
+  st = status\n\
+  co = checkout\n\
+  c = commit -s -v\n\
+  cssh = !sh -c 'git clone git@github.com:\$1 ' -\n\
+  rc = rebase --continue\n\
+  rom = rebase origin/master\n\
+  undo = reset HEAD~1 --mixed\n\
+  amend = commit -s -v --amend\n\
 "
 
 function git_install {
     sudo apt-get -y install git
-    echo $GIT_CONFIG > ~/.gitconfig
+    echo -e "$GIT_CONFIG" 
+    echo -e "$GIT_CONFIG" > ~/.gitconfig
 }
 
 function sshkey_creation {

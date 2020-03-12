@@ -2,9 +2,9 @@
   "gitSetup": {
     "userSetup": {
       "flags": [
-        { "key": "e", "value": "tiago.napoli@vtex.com.br" },
-        { "key": "n", "value": "tiagonapoli" },
-        { "key": "t", "value": "vim" }
+        { "name": "e", "value": "tiago.napoli@vtex.com.br" },
+        { "name": "u", "value": "Tiago Martins Nápoli" },
+        { "name": "t", "value": "vim" }
       ]
     },
     "repositories": {

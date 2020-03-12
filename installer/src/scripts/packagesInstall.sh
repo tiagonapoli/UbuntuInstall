@@ -60,7 +60,8 @@ yarn global add \
   cost-of-modules \
   releasy \
   typescript \
-  vtex
+  vtex \
+  kubelive
 
 # Dropbox
 wget -O /tmp/dropbox.deb -c https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
