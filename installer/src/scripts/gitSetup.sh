@@ -39,8 +39,8 @@ if [ "$EDITOR" == "" ]; then
 fi
 
 GIT_CONFIG="[user]\n\
-  email = $EMAIL\n\
-  name = $USERNAME\n\
+  email = \"$EMAIL\"\n\
+  name = \"$USERNAME\"\n\
 [core]\n\
   editor = $EDITOR\n\
 [alias]\n\
@@ -93,7 +93,7 @@ function send_sshkey_to_github {
 
 git_install
 sshkey_creation $EMAIL
-send_sshkey_to_github $USERNAME || exit 1
+send_sshkey_to_github $EMAIL || exit 1
 
 read -p "Enter your GITHUB_API_TOKEN (https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line): " gitToken
 

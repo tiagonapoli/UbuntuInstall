@@ -35,7 +35,7 @@ function createArgs(config: any) {
   if (config.flags) {
     config.flags.forEach(({ name, value }: Flag) => {
       args.push(`-${name}`)
-      args.push(`"${value}"`)
+      args.push(`${value}`)
     })
   }
 
