@@ -98,5 +98,7 @@ send_sshkey_to_github $EMAIL || exit 1
 read -p "Enter your GITHUB_API_TOKEN (https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line): " gitToken
 
 echo "
+## GITHUB setup
 export GITHUB_API_TOKEN=$gitToken
+################
 " >> ~/.bashrc
