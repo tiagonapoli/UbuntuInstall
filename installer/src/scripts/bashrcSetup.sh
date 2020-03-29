@@ -38,24 +38,19 @@ function bhi() {
 }
 ################
 
-## vtex aliases
+## VTEX aliases
 alias vtex='vtex --verbose'
 alias vl='vtex link --verbose' 
 alias vr='vtex workspace reset --verbose'
 ################
 
-## PATH setup
+## YARN GLOBAL
 export PATH=\$PATH:\$HOME/.yarn/bin
 ################
 
 ## OCLIF
-export PATH=$PATH:$HOME/.oclif/dev/bin
-export PATH=$PATH:$HOME/.vtex/dev/bin
-################
-
-## GO setup
-export GOPATH=\$HOME/Documents/go-workspace
-export PATH=\$PATH:\$GOPATH/bin
+export PATH=\$PATH:\$HOME/.oclif/dev/bin
+export PATH=\$PATH:\$HOME/.vtex/dev/bin
 ################
 
 ## OPENVPN aliases

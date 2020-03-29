@@ -1,5 +1,11 @@
 [
-  { "name": "packagesInstall", "scriptPath": "packagesInstall.sh" },
+  {
+    "name": "packageInstall",
+    "children": [
+      { "name": "packagesInstall", "scriptPath": "packageInstall/packagesInstall.sh" },
+      { "name": "goInstall", "scriptPath": "packageInstall/goInstall.sh" }
+    ]
+  },
   { "name": "bashrcSetup", "scriptPath": "bashrcSetup.sh" },
   {
     "name": "virtualizationSetup",
