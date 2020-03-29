@@ -53,11 +53,14 @@ GIT_CONFIG="[user]\n\
   rom = rebase origin/master\n\
   undo = reset HEAD~1 --mixed\n\
   amend = commit -s -v --amend\n\
+[commit]\n\
+  gpgsign = true\
 "
+
+GITHUB_TOKEN=""
 
 function git_install {
     sudo apt-get -y install git
-    echo -e "$GIT_CONFIG" 
     echo -e "$GIT_CONFIG" > ~/.gitconfig
 }
 
@@ -68,37 +71,91 @@ function sshkey_creation {
 }
 
 function send_sshkey_to_github {
-    pub=`cat ~/.ssh/id_rsa.pub`
-    user=$1
-    read -s -p "Enter github password for user $1: " password
-    echo ""
-    read -p "Enter the 2 factor key: " otp
-    echo ""
-    auth=$(echo -n $user:$password | base64 -)
-    
-    ret=$(curl --request POST \
-               --url https://api.github.com/user/keys \
-               --header "Authorization: Basic $auth" \
-               --header "x-github-otp: $otp" \
-               --data   "{\"title\":\"`hostname`\",\"key\":\"$pub\"}")
-    
+  pub=`cat ~/.ssh/id_rsa.pub`
+  user=$1
+
+  ret=$(curl --request POST \
+             --url    https://api.github.com/user/keys \
+             --header "Authorization: token $GITHUB_TOKEN" \
+             --data   "{\"title\":\"`hostname`\",\"key\":\"$pub\"}")
+
+  if echo $ret | grep -q "message"; then
     echo $ret
-    if echo $ret | grep -q "message"; then
-        echo "Error on sending ssh key to github"
-        return 1
-    else
-        return 0
-    fi    
+    echo "Error on sending ssh key to github"
+    return 1
+  else
+    return 0
+  fi
+}
+
+function generate_gpg_key {
+  BATCH_FILE="%no-protection\n\
+Key-Type: default\n\
+Subkey-Type: default\n\
+Name-Real: $USERNAME\n\
+Name-Email: $EMAIL\n\
+Expire-Date: 0"
+
+  echo -e $BATCH_FILE > /tmp/gpg-conf
+  gpg --gen-key --batch /tmp/gpg-conf
+
+  echo "===================================================================="
+  echo "GPG KEYS"
+  echo "===================================================================="
+
+  gpg --list-secret-keys --keyid-format LONG
+  echo "===================================================================="
+
+  GPG_ARMORED_PUBLIC_KEY=$(gpg --armor --export $EMAIL | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
+  DATA="{\"armored_public_key\":\""$GPG_ARMORED_PUBLIC_KEY"\"}"
+  ret=$(curl --request POST \
+             --url     https://api.github.com/user/gpg_keys \
+             --header  "Authorization: token $GITHUB_TOKEN" \
+             --data    "$DATA")
+
+  if echo $ret | grep -q "message"; then
+    echo $ret
+    echo "Error on sending gpg key to github"
+    return 1
+  else
+    return 0
+  fi
+}
+
+function create_api_token {
+  echo "===================================================================="
+  echo "GITHUB_API_TOKEN: In this step you'll have to create a personal"
+  echo "access token with:"
+  echo "- all 'repo' permissions"
+  echo "- Write 'admin:gpg_key'"
+  echo "- Write 'admin:public_key'"
+  echo "https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line"
+  echo "===================================================================="
+
+  read -p "Enter your GITHUB_API_TOKEN: " GITHUB_TOKEN
+
+  echo -e "\n\
+## GITHUB setup\n\
+export GITHUB_API_TOKEN=$GITHUB_TOKEN\n\
+################\n" >> ~/.bashrc
+}
+
+function jump_lines {
+  echo ""
+  echo ""
 }
 
 git_install
+jump_lines
+
+create_api_token
+jump_lines
+
 sshkey_creation $EMAIL
+jump_lines
+
 send_sshkey_to_github $EMAIL || exit 1
+jump_lines
 
-read -p "Enter your GITHUB_API_TOKEN (https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line): " gitToken
-
-echo "
-## GITHUB setup
-export GITHUB_API_TOKEN=$gitToken
-################
-" >> ~/.bashrc
+generate_gpg_key || exit 1
+jump_lines
