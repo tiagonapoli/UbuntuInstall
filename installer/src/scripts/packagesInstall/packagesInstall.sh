@@ -57,11 +57,15 @@ sudo apt -y install --no-install-recommends yarn
 # Add yarn global packages
 yarn global add \
   @tiagonapoli/vtex-scripts \
+  @vtex/toolbelt-config-cli \
   cost-of-modules \
   releasy \
   typescript \
   vtex \
-  kubelive
+  kubelive \
+  envinfo \
+  ts-prune \
+  yarn-check
 
 # Dropbox
 wget -O /tmp/dropbox.deb -c https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
