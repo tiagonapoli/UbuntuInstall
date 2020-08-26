@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euo pipefail
 
 display_info() {
   printf "Usage ./start.sh [OPT]\nOptions are:\n"

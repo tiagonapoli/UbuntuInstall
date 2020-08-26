@@ -2,8 +2,8 @@
   {
     "name": "packageInstall",
     "children": [
-      { "name": "packagesInstall", "scriptPath": "packageInstall/packagesInstall.sh" },
-      { "name": "goInstall", "scriptPath": "packageInstall/goInstall.sh" }
+      { "name": "packagesInstall", "scriptPath": "packagesInstall/packagesInstall.sh" },
+      { "name": "goInstall", "scriptPath": "packagesInstall/goInstall.sh" }
     ]
   },
   { "name": "bashrcSetup", "scriptPath": "bashrcSetup.sh" },

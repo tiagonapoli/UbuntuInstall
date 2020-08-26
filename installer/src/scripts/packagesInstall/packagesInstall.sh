@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -euo pipefail
-
 #update
 sudo apt -y update && sudo apt -y upgrade
 
@@ -32,7 +30,7 @@ sudo dpkg -i /tmp/vscode_install.deb
 sudo apt install -y -f
 
 #Langs
-sudo apt -y install python3 python-pip
+sudo apt -y install python3
 
 #Chrome
 sudo apt -y install libxss1 libappindicator1 libindicator7
@@ -70,3 +68,6 @@ yarn global add \
 # Dropbox
 wget -O /tmp/dropbox.deb -c https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
 sudo dpkg -i /tmp/dropbox.deb
+
+# Remove unnecessary
+sudo apt autoremove -y

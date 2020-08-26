@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -euo pipefail
-
 function install_docker {
   sudo apt -y remove docker docker-engine docker.io containerd runc
   sudo apt -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import execa from 'execa'
 import { writeJSONSync } from 'fs-extra'
-import { join, resolve } from 'path'
+import { join } from 'path'
+import { homedir } from 'os'
 
 interface VSCodeSetup {
   settings?: any
@@ -9,7 +10,7 @@ interface VSCodeSetup {
   extensionsToInstall?: string[]
 }
 
-const CODE_USER_CONFIG_PATH = resolve('~/.config/Code/User')
+const CODE_USER_CONFIG_PATH = join(homedir(), '.config/Code/User')
 const SETTINGS_PATH = join(CODE_USER_CONFIG_PATH, 'settings.json')
 const KEYBINDINGS_PATH = join(CODE_USER_CONFIG_PATH, 'keybindings.json')
 

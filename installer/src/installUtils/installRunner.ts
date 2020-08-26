@@ -56,11 +56,11 @@ export function runInstallStep({ name, scriptPath, config }: InstallStep, baseSc
   const absoluteScriptPath = join(baseScriptPath, scriptPath)
   const args = config ? createArgs(config) : ''
   let cmd
-  if (scriptPath.endsWith('.ts')) {
-    cmd = 'node'
+  if (scriptPath.endsWith('.js')) {
+    cmd = process.argv[0]
   } else if (scriptPath.endsWith('.sh')) {
     cmd = '/bin/bash'
   }
 
-  execa.sync(cmd, [absoluteScriptPath, ...args], { stdio: 'inherit' })
+  execa.sync(cmd, [absoluteScriptPath, ...args], { stdio: 'inherit', env: process.env })
 }
