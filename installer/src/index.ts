@@ -1,4 +1,4 @@
-import { mkdirpSync, readJSONSync, writeJSONSync } from 'fs-extra'
+import { mkdirpSync, readJSONSync, writeJSONSync, pathExistsSync } from 'fs-extra'
 import { dirname, join } from 'path'
 import { generateInstallSteps, InstallMapNode, InstallStep } from './installUtils/installMap'
 import { runInstallStep } from './installUtils/installRunner'
@@ -7,9 +7,9 @@ const STEPS_PATH = join(__dirname, '../..', 'tmp', 'steps.json')
 const CONFIG_PATH = join(__dirname, '../..', 'config')
 
 function readSteps(): InstallStep[] {
-  // if (pathExistsSync(STEPS_PATH)) {
-  //   return readJSONSync(STEPS_PATH)
-  // }
+  if (pathExistsSync(STEPS_PATH)) {
+    return readJSONSync(STEPS_PATH)
+  }
 
   mkdirpSync(dirname(STEPS_PATH))
   const installTree: InstallMapNode = {
